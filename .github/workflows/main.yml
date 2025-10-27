@@ -46,9 +46,9 @@ jobs:
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/tp-devops-database:latest
           push: ${{ github.ref == 'refs/heads/main' }}
 
-      - name: Build image and push https
+      - name: Build image and push http
         uses: docker/build-push-action@v6
         with:
-          context: ./https
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/tp-devops-https:latest
+          context: ./http
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/tp-devops-http:latest
           push: ${{ github.ref == 'refs/heads/main' }}
