@@ -1,0 +1,22 @@
+name: Deploy on server
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Ansible
+        run: sudo apt-get update && sudo apt-get install -y ansible
+
+      - name: Deploy app
+        env:
+          ANSIBLE_HOST_KEY_CHECKING: False
+        run: |
+          ansible-playbook -i ansible/inventories/setup.yml ansible/playbook.yml
+
