@@ -9,3 +9,29 @@ Le mot clef `needs` permet de lier et de définir une dépendance entre deux tâ
 ## Question 2.4
 Pousser les images sur Docker Hub permet de les partager et de les déployer plus facilement. Cela permet ainsi à des environnements différents de récupéper facilement la même version de l'application pour garantir sa reprocductibilité.
 # TP3 : Ansible
+## Question 3.1
+```txt
+all:
+  vars:
+    ansible_user: admin
+    ansible_ssh_private_key_file: /home/admin/.ssh/id_rsa
+    ansible_python_interpreter: /usr/bin/python3
+  children:
+    prod:
+      hosts:
+        192.168.1.10:
+```
+## Question 3.2
+```txt
+- hosts: prod
+  gather_facts: true
+  become: true
+
+  roles:
+    - role: docker
+    - role: network
+    - role: database
+    - role: backend
+    - role: proxy
+```
+
